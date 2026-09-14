@@ -5,7 +5,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 func _ready() -> void:
-	$Camera2D.position = $AnimatedSprite2D.position
+	pass
 
 func _physics_process(delta: float) -> void:
 	# right to left movement
