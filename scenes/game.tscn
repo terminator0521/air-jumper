@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dm0ix6e406opf" path="res://scripts/player.gd" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://hshxno505ddx" path="res://textures/platforms/rocket.png" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://d4gm8q8j3w54e" path="res://scripts/rocket.gd" id="4_lbhrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0sk"]
 
@@ -53,20 +55,37 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="QuadMesh" id="QuadMesh_njqwk"]
+size = Vector2(120, 40)
+
+[sub_resource type="MultiMesh" id="MultiMesh_b1lj4"]
+instance_count = 10
+mesh = SubResource("QuadMesh_njqwk")
+buffer = PackedFloat32Array(0.5, 3.9999998, 1, 1, 1, 0.05, 0.006048387, 0.16129032, 0.7664218, 2.660608, 1, 1, 1, 0.05, 0.0071226684, 0.11808413, 1.525126, 1.5251265, 1, 1, 1, 0.05, 0.01018196, 0.08145569, 2.6606073, 0.7664218, 1, 1, 1, 0.05, 0.014760514, 0.056981348, 4, 0.5, 1, 1, 1, 0.05, 0.02016129, 0.048387095, 242, 0.5, 1, 1, 1, 0.05, 0.9798387, 0.048387095, 243.33939, 0.76642203, 1, 1, 1, 0.05, 0.98523945, 0.056981355, 244.47487, 1.525126, 1, 1, 1, 0.05, 0.98981804, 0.08145568, 245.23358, 2.660608, 1, 1, 1, 0.05, 0.99287736, 0.11808413, 245.5, 4.0000005, 1, 1, 1, 0.05, 0.9939516, 0.16129033)
+
 [node name="Node2D" type="Node2D" unique_id=251696169]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=61970098]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
 script = ExtResource("1_yqjtg")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1974312624]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1974312624]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1496453542]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1496453542]
 shape = SubResource("RectangleShape2D_2g0sk")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1041880759]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1041880759]
 texture_filter = 1
-position = Vector2(193, 143)
+position = Vector2(632, 107)
 scale = Vector2(5.375, 5.375)
 sprite_frames = SubResource("SpriteFrames_sfuul")
 animation = &"walking"
-frame_progress = 0.7457577
+frame = 3
+frame_progress = 0.45289633
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1654445354]
+
+[node name="Rocket" type="MultiMeshInstance2D" parent="Platforms" unique_id=1317146511]
+multimesh = SubResource("MultiMesh_b1lj4")
+texture = ExtResource("3_lnu2h")
+script = ExtResource("4_lbhrr")
+instance_count = 10
