@@ -10,15 +10,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# right to left movement
 	if Input.is_key_pressed(KEY_LEFT):
-		velocity.x -= SPEED * delta
+		position.x -= SPEED * delta
 		$AnimatedSprite2D.flip_h = 1
 		$AnimatedSprite2D.play("walking")
 	elif Input.is_key_pressed(KEY_RIGHT):
 		$AnimatedSprite2D.flip_h = 0
 		$AnimatedSprite2D.play("walking")
-		velocity.x += SPEED * delta
+		position.x += SPEED * delta
 	else:
 		$AnimatedSprite2D.play("default")
 
-	move_and_slide()
 	pass
