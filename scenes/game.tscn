@@ -64,6 +64,9 @@ script = ExtResource("1_yqjtg")
 shape = SubResource("RectangleShape2D_2g0sk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1041880759]
+texture_filter = 1
+position = Vector2(70, 70)
+scale = Vector2(5.375, 5.375)
 sprite_frames = SubResource("SpriteFrames_sfuul")
 animation = &"walking"
 frame_progress = 0.7457577

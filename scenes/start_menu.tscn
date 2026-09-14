@@ -17,19 +17,19 @@ script = ExtResource("1_fcv5n")
 
 [node name="Play" type="TextureButton" parent="." unique_id=195546547]
 layout_mode = 0
-offset_left = 107.0
-offset_top = 299.0
-offset_right = 507.0
-offset_bottom = 399.0
+offset_left = 199.0
+offset_top = 147.0
+offset_right = 599.0
+offset_bottom = 247.0
 texture_normal = ExtResource("2_thu50")
 texture_pressed = ExtResource("2_m7x51")
 
 [node name="Exit" type="TextureButton" parent="." unique_id=1597327541]
 layout_mode = 0
-offset_left = 640.0
-offset_top = 295.0
-offset_right = 1038.0
-offset_bottom = 393.0
+offset_left = 197.0
+offset_top = 389.0
+offset_right = 595.0
+offset_bottom = 487.0
 action_mode = 0
 texture_normal = ExtResource("3_h61rw")
 texture_pressed = ExtResource("4_fcv5n")
