@@ -1,3 +1,69 @@
 [gd_scene format=3 uid="uid://bw7avjo8p17vq"]
 
-[node name="Node2D" type="Node2D" unique_id=510765830]
+[ext_resource type="Script" uid="uid://dm0ix6e406opf" path="res://scripts/player.gd" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0sk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
+atlas = ExtResource("2_lnu2h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbhrr"]
+atlas = ExtResource("2_lnu2h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iywne"]
+atlas = ExtResource("2_lnu2h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p57ef"]
+atlas = ExtResource("2_lnu2h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5sy4"]
+atlas = ExtResource("2_lnu2h")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sfuul"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqjtg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbhrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iywne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p57ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5sy4")
+}],
+"loop": 1,
+"name": &"walking",
+"speed": 3.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=251696169]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=61970098]
+script = ExtResource("1_yqjtg")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1974312624]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1496453542]
+shape = SubResource("RectangleShape2D_2g0sk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1041880759]
+sprite_frames = SubResource("SpriteFrames_sfuul")
+animation = &"walking"
+frame_progress = 0.7457577
