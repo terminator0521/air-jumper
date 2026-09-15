@@ -4,8 +4,33 @@
 [ext_resource type="Script" uid="uid://dm0ix6e406opf" path="res://scripts/player.gd" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://dicbwt0fkte4u" path="res://scripts/rocket_spawner.gd" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://hshxno505ddx" path="res://textures/platforms/rocket.png" id="5_iywne"]
+[ext_resource type="Script" uid="uid://cq8flqu86p5an" path="res://scenes/RocketAnimation.gd" id="6_p57ef"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0sk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfuul"]
+size = Vector2(201.5, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
+atlas = ExtResource("5_iywne")
+region = Rect2(0, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tnpc"]
+atlas = ExtResource("5_iywne")
+region = Rect2(120, 0, 120, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wjq10"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gee14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tnpc")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 20.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
 atlas = ExtResource("2_lnu2h")
@@ -52,8 +77,11 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walking",
-"speed": 3.0
+"speed": 4.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0sk"]
+size = Vector2(38, 78)
 
 [node name="Node2D" type="Node2D" unique_id=251696169]
 
@@ -62,26 +90,42 @@ position = Vector2(62, 38.999996)
 scale = Vector2(11.0546875, 5.734375)
 texture = ExtResource("1_lbhrr")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
-script = ExtResource("1_yqjtg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1496453542]
-shape = SubResource("RectangleShape2D_2g0sk")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1041880759]
-texture_filter = 1
-position = Vector2(-14, 14)
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_sfuul")
-animation = &"walking"
-frame = 3
-frame_progress = 0.45289633
-
 [node name="RocketSpawner" type="Node2D" parent="." unique_id=1139047990]
 script = ExtResource("3_lnu2h")
 
-[node name="Spawn1" type="Marker2D" parent="RocketSpawner" unique_id=1697151239]
-position = Vector2(943, -64)
+[node name="Rocket" type="CharacterBody2D" parent="RocketSpawner" unique_id=467692006]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RocketSpawner/Rocket" unique_id=1428082400]
+position = Vector2(214.24997, -15.5)
+shape = SubResource("RectangleShape2D_sfuul")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RocketSpawner/Rocket" unique_id=1980354830]
+texture_filter = 1
+position = Vector2(227.99998, -15.999992)
+scale = Vector2(2.1, 1.6)
+sprite_frames = SubResource("SpriteFrames_wjq10")
+frame_progress = 0.73849356
+script = ExtResource("6_p57ef")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
+position = Vector2(329, -109)
+floor_constant_speed = true
+script = ExtResource("1_yqjtg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1041880759]
+texture_filter = 1
+position = Vector2(-105, -17)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_sfuul")
+animation = &"walking"
+frame = 1
+frame_progress = 0.04673195
+
+[node name="Area2D" type="Area2D" parent="Player" unique_id=1526341759]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1567380980]
+position = Vector2(-107, -17)
+shape = SubResource("RectangleShape2D_2g0sk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=358191341]
 position = Vector2(44.99997, -22.000002)
