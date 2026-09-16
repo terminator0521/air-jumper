@@ -69,7 +69,7 @@ texture = ExtResource("1_lbhrr")
 script = ExtResource("2_iywne")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
-position = Vector2(329, -109)
+position = Vector2(107, -214)
 floor_constant_speed = true
 script = ExtResource("1_yqjtg")
 

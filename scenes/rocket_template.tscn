@@ -30,16 +30,17 @@ animations = [{
 
 [node name="Node2D" type="Node2D" unique_id=908383963]
 
-[node name="Rocket" type="CharacterBody2D" parent="." unique_id=870053865]
+[node name="Rocket" type="CharacterBody2D" parent="." unique_id=870053865 groups=["Platform"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_d7i5y")
 
 [node name="Hitbox" type="Area2D" parent="Rocket" unique_id=1312579194 groups=["Platform"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket/Hitbox" unique_id=1496635660]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket/Hitbox" unique_id=1496635660 groups=["Platform"]]
 position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_iywne")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Rocket" unique_id=839841338]
+[node name="Sprite" type="AnimatedSprite2D" parent="Rocket" unique_id=839841338 groups=["Platform"]]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_iywne")
-frame_progress = 0.7100145
+frame_progress = 0.7246057
