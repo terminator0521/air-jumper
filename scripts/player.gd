@@ -1,9 +1,14 @@
 extends CharacterBody2D
 
-
-const SPEED = 200.0
-const JUMP_VELOCITY = -400.0
+var is_jumping = false
+var is_falling = true
+var platform_velocity
+var displacement: Vector2
 var h_direction: float
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+const FALL_SPEED = 250.0
 
 func _ready() -> void:
 	pass
@@ -22,6 +27,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
 		h_direction = -1
@@ -30,7 +36,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		h_direction = 0
 	
-	# move
-	velocity.x = h_direction * SPEED
-	move_and_slide()
+	displacement.x = h_direction * SPEED * delta
+	
+	# Gravity
+	if is_falling:
+		displacement.y = FALL_SPEED * delta
+	else:
+		displacement.y = 0;
+	
+	# Apply movement
+	var collide = move_and_collide(displacement)
 	pass
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	is_falling = false;
+	pass # Replace with function body.

@@ -30,6 +30,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfuul"]
+size = Vector2(188, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
 atlas = ExtResource("2_lnu2h")
@@ -105,6 +106,7 @@ script = ExtResource("6_p57ef")
 [node name="Area2D" type="Area2D" parent="Rockets/Rocket" unique_id=279092246]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rockets/Rocket/Area2D" unique_id=917188055]
+position = Vector2(219, -16)
 shape = SubResource("RectangleShape2D_sfuul")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
@@ -130,3 +132,5 @@ shape = SubResource("RectangleShape2D_2g0sk")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=358191341]
 position = Vector2(44.99997, -22.000002)
 scale = Vector2(0.05, 0.285)
+
+[connection signal="area_entered" from="Rockets/Rocket/Area2D" to="Player" method="_on_area_2d_area_entered"]
