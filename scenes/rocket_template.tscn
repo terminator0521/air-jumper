@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://biecgkuynwy0w"]
+
+[ext_resource type="Script" uid="uid://cjmdp5dqm1507" path="res://scripts/rocket.gd" id="1_d7i5y"]
+[ext_resource type="Texture2D" uid="uid://hshxno505ddx" path="res://textures/platforms/rocket.png" id="2_xiha7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(84, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ymbd"]
+atlas = ExtResource("2_xiha7")
+region = Rect2(0, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od01w"]
+atlas = ExtResource("2_xiha7")
+region = Rect2(120, 0, 120, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iywne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ymbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od01w")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=908383963]
+
+[node name="Rocket" type="CharacterBody2D" parent="." unique_id=870053865]
+script = ExtResource("1_d7i5y")
+
+[node name="Hitbox" type="Area2D" parent="Rocket" unique_id=1312579194 groups=["Platform"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket/Hitbox" unique_id=1496635660]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Rocket" unique_id=839841338]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_iywne")
+frame_progress = 0.7100145
