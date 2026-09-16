@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var is_jumping = false
-var is_falling = true
+var is_grounded = false
 var platform_velocity
 var displacement: Vector2
 var h_direction: float
@@ -39,10 +39,10 @@ func _physics_process(delta: float) -> void:
 	displacement.x = h_direction * SPEED * delta
 	
 	# Gravity
-	if is_falling:
-		displacement.y = FALL_SPEED * delta
-	else:
+	if is_grounded:
 		displacement.y = 0;
+	else:
+		displacement.y = FALL_SPEED * delta
 	
 	# Apply movement
 	var collide = move_and_collide(displacement)
@@ -50,9 +50,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area != null:
-		if area.is_in_group("Platform"):
-			is_falling = false
-			
-			
+	if area.is_in_group("Platform"):
+		is_grounded = true
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.is_in_group("Platform"):
+		is_grounded = false
 	pass # Replace with function body.
