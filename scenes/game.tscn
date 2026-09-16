@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bw7avjo8p17vq"]
 
 [ext_resource type="Texture2D" uid="uid://cwxk0r215eexl" path="res://icon.svg" id="1_lbhrr"]
+[ext_resource type="Script" uid="uid://bfnl4j1p1gbec" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://dm0ix6e406opf" path="res://scripts/player.gd" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://dicbwt0fkte4u" path="res://scripts/rocket_manager.gd" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
@@ -84,6 +85,7 @@ animations = [{
 size = Vector2(38, 78)
 
 [node name="Node2D" type="Node2D" unique_id=251696169]
+script = ExtResource("1_u5sy4")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=811809483]
 position = Vector2(62, 38.999996)
@@ -93,7 +95,7 @@ texture = ExtResource("1_lbhrr")
 [node name="Rockets" type="Node2D" parent="." unique_id=1139047990]
 script = ExtResource("2_iywne")
 
-[node name="Rocket" type="CharacterBody2D" parent="Rockets" unique_id=467692006]
+[node name="Rocket" type="CharacterBody2D" parent="Rockets" unique_id=467692006 groups=["Platform"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rockets/Rocket" unique_id=1980354830]
 texture_filter = 1
@@ -103,7 +105,7 @@ sprite_frames = SubResource("SpriteFrames_wjq10")
 frame_progress = 0.8761893
 script = ExtResource("6_p57ef")
 
-[node name="Area2D" type="Area2D" parent="Rockets/Rocket" unique_id=279092246]
+[node name="Area2D" type="Area2D" parent="Rockets/Rocket" unique_id=279092246 groups=["Platform"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rockets/Rocket/Area2D" unique_id=917188055]
 position = Vector2(219, -16)
@@ -133,4 +135,4 @@ shape = SubResource("RectangleShape2D_2g0sk")
 position = Vector2(44.99997, -22.000002)
 scale = Vector2(0.05, 0.285)
 
-[connection signal="area_entered" from="Rockets/Rocket/Area2D" to="Player" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
