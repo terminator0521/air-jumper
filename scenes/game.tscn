@@ -69,13 +69,12 @@ texture = ExtResource("1_lbhrr")
 script = ExtResource("2_iywne")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
-position = Vector2(107, -214)
+position = Vector2(-1, -179)
 floor_constant_speed = true
 script = ExtResource("1_yqjtg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1041880759]
 texture_filter = 1
-position = Vector2(-105, -17)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_sfuul")
 animation = &"walking"
@@ -85,7 +84,6 @@ frame_progress = 0.04673195
 [node name="Area2D" type="Area2D" parent="Player" unique_id=1526341759]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1567380980]
-position = Vector2(-107, -17)
 shape = SubResource("RectangleShape2D_2g0sk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=358191341]

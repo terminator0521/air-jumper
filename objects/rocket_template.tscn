@@ -37,7 +37,6 @@ script = ExtResource("1_dskcv")
 [node name="Hitbox" type="Area2D" parent="Rocket" unique_id=1312579194 groups=["Platform"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket/Hitbox" unique_id=1496635660 groups=["Platform"]]
-position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_iywne")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Rocket" unique_id=839841338 groups=["Platform"]]

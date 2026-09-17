@@ -51,10 +51,23 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
-		is_grounded = true
+		print($Area2D.global_position.y + _get_extents($Area2D).y)
+		print(area.global_position.y - _get_extents(area).y)
+		if $Area2D.global_position.y + _get_extents($Area2D).y - 4 < area.global_position.y - _get_extents(area).y:
+			is_grounded = true
+			pass
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
 		is_grounded = false
 	pass # Replace with function body.
+	
+func _get_extents(area: Node2D) -> Vector2:
+	var owner = area.get_shape_owners()
+	var other_shape = area.shape_owner_get_shape(owner[0], 0)
+	if other_shape:
+		var extents = other_shape.get("extents")
+		if extents is Vector2:
+			return extents * area.global_scale
+	return Vector2.ZERO

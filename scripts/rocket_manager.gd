@@ -5,7 +5,7 @@ var _rockets: Array[Node2D]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	for i in range(5):
+	for i in range(1):
 		# 1. Spawn template
 		var rocket_instance = _ROCKET_SCENE.instantiate()
 		
