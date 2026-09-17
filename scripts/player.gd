@@ -51,8 +51,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
-		print($Area2D.global_position.y + _get_extents($Area2D).y)
-		print(area.global_position.y - _get_extents(area).y)
 		if $Area2D.global_position.y + _get_extents($Area2D).y - 4 < area.global_position.y - _get_extents(area).y:
 			is_grounded = true
 			pass
