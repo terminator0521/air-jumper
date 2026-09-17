@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://biecgkuynwy0w"]
 
-[ext_resource type="Script" uid="uid://cjmdp5dqm1507" path="res://scripts/rocket.gd" id="1_d7i5y"]
-[ext_resource type="Texture2D" uid="uid://hshxno505ddx" path="res://textures/platforms/rocket.png" id="2_xiha7"]
+[ext_resource type="Script" uid="uid://cjmdp5dqm1507" path="res://scripts/rocket.gd" id="1_dskcv"]
+[ext_resource type="Texture2D" uid="uid://hshxno505ddx" path="res://textures/platforms/rocket.png" id="2_gbott"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(84, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ymbd"]
-atlas = ExtResource("2_xiha7")
+atlas = ExtResource("2_gbott")
 region = Rect2(0, 0, 120, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_od01w"]
-atlas = ExtResource("2_xiha7")
+atlas = ExtResource("2_gbott")
 region = Rect2(120, 0, 120, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iywne"]
@@ -32,7 +32,7 @@ animations = [{
 
 [node name="Rocket" type="CharacterBody2D" parent="." unique_id=870053865 groups=["Platform"]]
 scale = Vector2(2, 2)
-script = ExtResource("1_d7i5y")
+script = ExtResource("1_dskcv")
 
 [node name="Hitbox" type="Area2D" parent="Rocket" unique_id=1312579194 groups=["Platform"]]
 
