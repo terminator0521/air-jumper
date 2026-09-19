@@ -17,15 +17,18 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if h_direction != 0:
 		$AnimatedSprite2D.flip_h = (h_direction < 0)
-
-	match h_direction:
-		1.0, -1.0:
-			if $AnimatedSprite2D.animation != "walking":
-				$AnimatedSprite2D.play("walking")
-		0.0:
-			if $AnimatedSprite2D.animation != "default":
-				$AnimatedSprite2D.play("default")
-	pass
+	
+	if is_grounded:
+		match h_direction:
+			1.0, -1.0:
+				if $AnimatedSprite2D.animation != "walking":
+					$AnimatedSprite2D.play("walking")
+			0.0:
+				if $AnimatedSprite2D.animation != "default":
+					$AnimatedSprite2D.play("default")
+	else:
+		if $AnimatedSprite2D.animation != "default":
+			$AnimatedSprite2D.play("default")
 
 func _physics_process(delta: float) -> void:
 	print(displacement.y)	
@@ -45,6 +48,8 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and !is_jumping:
 			is_jumping = true
 			is_grounded = false
+		elif Input.is_action_just_pressed("down") and !is_jumping:
+			is_grounded = false
 		else:
 			displacement.y = 0
 	elif is_jumping:
@@ -60,7 +65,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
-		if $Area2D.global_position.y + _get_extents($Area2D).y - 4 < area.global_position.y - _get_extents(area).y:
+		if $Area2D.global_position.y + _get_extents($Area2D).y - 6 < area.global_position.y - _get_extents(area).y:
 			is_grounded = true
 			#$Area2D.global_position.y = area.global_position.y - _get_extents(area).y - _get_extents($Area2D).y
 			pass
