@@ -5,10 +5,11 @@ var is_grounded = false
 var platform_velocity
 var displacement: Vector2
 var h_direction: float
+var falling_speed: float = 10
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const FALL_SPEED = 250.0
+const SPEED = 300
+const JUMP_VELOCITY = -400
+const MAX_FALL_SPEED = 10
 
 func _ready() -> void:
 	pass
@@ -27,6 +28,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	print(displacement.y)	
 	
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
@@ -38,11 +40,18 @@ func _physics_process(delta: float) -> void:
 	
 	displacement.x = h_direction * SPEED * delta
 	
-	# Gravity
+	# Gravity and jump
 	if is_grounded:
-		displacement.y = 0;
-	else:
-		displacement.y = FALL_SPEED * delta
+		if Input.is_action_just_pressed("jump") and !is_jumping:
+			is_jumping = true
+			is_grounded = false
+		else:
+			displacement.y = 0
+	elif is_jumping:
+		is_jumping = false
+		displacement.y = JUMP_VELOCITY * delta
+	elif displacement.y < MAX_FALL_SPEED:
+		displacement.y += falling_speed * delta
 	
 	# Apply movement
 	var collide = move_and_collide(displacement)
@@ -53,6 +62,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
 		if $Area2D.global_position.y + _get_extents($Area2D).y - 4 < area.global_position.y - _get_extents(area).y:
 			is_grounded = true
+			#$Area2D.global_position.y = area.global_position.y - _get_extents(area).y - _get_extents($Area2D).y
 			pass
 
 
