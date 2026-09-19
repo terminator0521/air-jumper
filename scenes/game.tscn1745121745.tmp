@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cwxk0r215eexl" path="res://icon.svg" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://bfnl4j1p1gbec" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://dm0ix6e406opf" path="res://scripts/player.gd" id="1_yqjtg"]
-[ext_resource type="Script" uid="uid://dicbwt0fkte4u" path="res://scripts/platform_mgr.gd" id="2_iywne"]
+[ext_resource type="Script" uid="uid://dicbwt0fkte4u" path="res://scripts/rocket_manager.gd" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
@@ -65,7 +65,7 @@ position = Vector2(62, 38.999996)
 scale = Vector2(11.0546875, 5.734375)
 texture = ExtResource("1_lbhrr")
 
-[node name="Platforms" type="Node2D" parent="." unique_id=1139047990]
+[node name="Rockets" type="Node2D" parent="." unique_id=1139047990]
 script = ExtResource("2_iywne")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
