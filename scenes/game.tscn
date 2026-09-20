@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://dicbwt0fkte4u" path="res://scripts/platform_mgr.gd" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfuul"]
+size = Vector2(800, 598)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
 atlas = ExtResource("2_lnu2h")
 region = Rect2(0, 0, 32, 32)
@@ -66,6 +69,13 @@ texture = ExtResource("1_lbhrr")
 [node name="Platforms" type="Node2D" parent="." unique_id=1139047990]
 script = ExtResource("2_iywne")
 
+[node name="PlatformResetTrigger" type="Area2D" parent="Platforms" unique_id=441137169]
+position = Vector2(-389, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/PlatformResetTrigger" unique_id=682551370]
+position = Vector2(390, -2)
+shape = SubResource("RectangleShape2D_sfuul")
+
 [node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
 position = Vector2(-1, -179)
 floor_constant_speed = true
@@ -86,5 +96,6 @@ shape = SubResource("RectangleShape2D_2g0sk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=358191341]
 
+[connection signal="area_exited" from="Platforms/PlatformResetTrigger" to="Platforms" method="_on_platform_reset_trigger_area_exited"]
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]

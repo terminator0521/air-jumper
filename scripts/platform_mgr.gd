@@ -3,27 +3,27 @@ extends Node2D
 @export var _start_despawn_time: float = 3
 var _despawn_timer: float = 0
 
-const h_platform_offset = 250
+const h_platform_offset = 300
 var _start_platform
 const _ROCKET_SCENE = preload("res://objects/rocket_template.tscn")
-const _start_x = 400
-const _SPAWN_POS_Y: Array = [
-	-150,
-	70,
-	127,
-	-137,
-	-53,
-	123,
-	-113,
-	86,
-	137,
-	123,
-	-127,
-	120
+const _start_x = 450
+const _SPAWN_POS_Y: Array[float] = [
+	-160,
+	-120,
+	-80,
+	-40,
+	0,
+	40,
+	73,
+	94,
+	130,
+	163,
+	190,
+	220
 ]
-const _SPAWN_POS_X: Array = [
-	_start_x - 160,
-	_start_x - 120,
+const _SPAWN_POS_X: Array[float] = [
+	_start_x + 40,
+	_start_x + 80,
 	_start_x - 40,
 	_start_x - 80,
 	_start_x
@@ -38,15 +38,15 @@ func _ready() -> void:
 	add_child(_start_platform)
 	
 	# all rockets
-	for i in range(9):
+	for i in range(12):
 		var platforms = _ROCKET_SCENE.instantiate()
 		platforms.set_id(i)
 		add_child(platforms)
 		_reset_rocket(i)
 	
 	for i in range(3): # waves of rockets
-		for j in range(3 * i, 3 * i + 3): # rockets per wave
-			Game.rocket_reset.emit(j, Vector2(_SPAWN_POS_X.pick_random() + (h_platform_offset * i), _SPAWN_POS_Y[j]))
+		for j in range(3 * i, 3 * i + 4): # rockets per wave
+			Game.rocket_reset.emit(j, Vector2(_SPAWN_POS_X.pick_random() + (h_platform_offset * i), _SPAWN_POS_Y.pick_random()))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -70,3 +70,11 @@ func _reset_rocket(id) -> void:
 	
 	Game.rocket_reset.emit(id, new_pos)
 	pass
+
+
+func _on_platform_reset_trigger_area_exited(area: Area2D) -> void:
+	if area.is_in_group("Platform"):
+		var id = area.get_parent().id
+		if id != null:
+			_reset_rocket(id)
+	pass # Replace with function body.
