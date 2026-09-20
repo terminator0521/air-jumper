@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var id: int
+var id
 var is_active: bool = true;
 var displacement = Vector2(-300, 0)
 
@@ -11,16 +11,18 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_active:
 		move_and_collide(displacement * delta)
+		print(global_position)
 	
 	
 	pass
 
-func _reset_rocket(pos: Vector2) -> void:
-	position = pos
+func _reset_rocket(id, pos: Vector2) -> void:
+	if id == self.id:
+		global_position = pos
+		print(global_position)
 	pass
 
-func set_id(id: int) -> void:
+func set_id(id) -> void:
 	self.id = id
-	print(id)
 	pass
 	

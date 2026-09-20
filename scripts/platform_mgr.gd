@@ -7,18 +7,18 @@ var _start_platform
 const _ROCKET_SCENE = preload("res://objects/rocket_template.tscn")
 const _start_x = 400
 const _SPAWN_POS_Y: Array[Vector2] = [
-	Vector2(-250, _start_x),
-	Vector2(250, _start_x),
-	Vector2(167, _start_x),
-	Vector2(-167, _start_x),
-	Vector2(-233, _start_x),
-	Vector2(123, _start_x),
-	Vector2(-153, _start_x),
-	Vector2(256, _start_x),
-	Vector2(277, _start_x),
-	Vector2(123, _start_x),
-	Vector2(-297, _start_x),
-	Vector2(-177, _start_x)
+	Vector2(_start_x, -250),
+	Vector2(_start_x, 250),
+	Vector2(_start_x, 167),
+	Vector2(_start_x, -167),
+	Vector2(_start_x, -233),
+	Vector2(_start_x, 123),
+	Vector2(_start_x, -153),
+	Vector2(_start_x, 256),
+	Vector2(_start_x, 277),
+	Vector2(_start_x, 123),
+	Vector2(_start_x, -297),
+	Vector2(_start_x, -177)
 ]
 var _rockets: Array[Node2D]
 # Called when the node enters the scene tree for the first time.
@@ -33,6 +33,7 @@ func _ready() -> void:
 		var platforms = _ROCKET_SCENE.instantiate()
 		platforms.set_id(i)
 		add_child(platforms)
+		_reset_rocket(i)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -49,8 +50,8 @@ func _physics_process(delta: float) -> void:
 	
 	
 
-func _reset_rocket() -> void:
+func _reset_rocket(id) -> void:
 	var new_pos = _SPAWN_POS_Y.pick_random()
 	
-	Game.rocket_reset.emit(new_pos)
+	Game.rocket_reset.emit(id, new_pos)
 	pass
