@@ -6,19 +6,25 @@ var _despawn_timer: float = 0
 var _start_platform
 const _ROCKET_SCENE = preload("res://objects/rocket_template.tscn")
 const _start_x = 400
-const _SPAWN_POS_Y: Array[Vector2] = [
-	Vector2(_start_x, -250),
-	Vector2(_start_x, 250),
-	Vector2(_start_x, 167),
-	Vector2(_start_x, -167),
-	Vector2(_start_x, -233),
-	Vector2(_start_x, 123),
-	Vector2(_start_x, -153),
-	Vector2(_start_x, 256),
-	Vector2(_start_x, 277),
-	Vector2(_start_x, 123),
-	Vector2(_start_x, -297),
-	Vector2(_start_x, -177)
+const _SPAWN_POS_Y: Array = [
+	-150,
+	70,
+	127,
+	-137,
+	-53,
+	123,
+	-113,
+	86,
+	137,
+	123,
+	-127,
+	120
+]
+const _SPAWN_POS_X: Array = [
+	_start_x - 160,
+	_start_x - 120,
+	_start_x - 40,
+	_start_x - 80
 ]
 var _rockets: Array[Node2D]
 # Called when the node enters the scene tree for the first time.
@@ -51,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _reset_rocket(id) -> void:
-	var new_pos = _SPAWN_POS_Y.pick_random()
+	var new_pos = Vector2(_SPAWN_POS_X.pick_random(), _SPAWN_POS_Y.pick_random())
 	
 	Game.rocket_reset.emit(id, new_pos)
 	pass
