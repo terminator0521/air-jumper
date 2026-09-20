@@ -9,6 +9,7 @@ var falling_speed: float = 10
 const SPEED = 300
 const JUMP_VELOCITY = -400
 const MAX_FALL_SPEED = 10
+var last_dir: float
 
 func _ready() -> void:
 	pass
@@ -34,7 +35,9 @@ func _physics_process(delta: float) -> void:
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
 		h_direction = -1
+		last_dir = -1
 	elif Input.is_key_pressed(KEY_RIGHT):
+		last_dir = 1
 		h_direction = 1
 	else:
 		h_direction = 0
@@ -56,6 +59,9 @@ func _physics_process(delta: float) -> void:
 	elif displacement.y < MAX_FALL_SPEED:
 		displacement.y += falling_speed * delta
 	
+	# Shoot
+	if Input.is_action_just_pressed("shoot"):
+		Game.shoot.emit(position, last_dir)
 	
 	# Apply movement
 	var collide = move_and_collide(displacement)

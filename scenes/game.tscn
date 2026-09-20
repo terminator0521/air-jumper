@@ -4,9 +4,8 @@
 [ext_resource type="Script" uid="uid://dm0ix6e406opf" path="res://scripts/player.gd" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://dicbwt0fkte4u" path="res://scripts/platform_mgr.gd" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://cbjqvrnjthtjc" path="res://textures/entities/player.png" id="2_lnu2h"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfuul"]
-size = Vector2(800, 598)
+[ext_resource type="Texture2D" uid="uid://bjddcj5n6bjst" path="res://textures/entities/bullet.png" id="5_iywne"]
+[ext_resource type="Script" uid="uid://dqmdvwlisolxq" path="res://scripts/bullet.gd" id="5_p57ef"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
 atlas = ExtResource("2_lnu2h")
@@ -59,6 +58,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0sk"]
 size = Vector2(38, 78)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khkww"]
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khkww"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfuul"]
+size = Vector2(800, 598)
+
 [node name="Node2D" type="Node2D" unique_id=251696169]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=811809483]
@@ -68,13 +75,6 @@ texture = ExtResource("1_lbhrr")
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1139047990]
 script = ExtResource("2_iywne")
-
-[node name="PlatformResetTrigger" type="Area2D" parent="Platforms" unique_id=441137169]
-position = Vector2(-389, 2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/PlatformResetTrigger" unique_id=682551370]
-position = Vector2(390, -2)
-shape = SubResource("RectangleShape2D_sfuul")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=61970098]
 position = Vector2(-1, -179)
@@ -96,6 +96,29 @@ shape = SubResource("RectangleShape2D_2g0sk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=358191341]
 
-[connection signal="area_exited" from="Platforms/PlatformResetTrigger" to="Platforms" method="_on_platform_reset_trigger_area_exited"]
+[node name="Bullet" type="CharacterBody2D" parent="." unique_id=536668232]
+position = Vector2(-549, 23)
+script = ExtResource("5_p57ef")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet" unique_id=312681583]
+texture = ExtResource("5_iywne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet" unique_id=650765407]
+shape = SubResource("CapsuleShape2D_khkww")
+
+[node name="Area" type="Area2D" parent="Bullet" unique_id=781334428 groups=["Bullet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet/Area" unique_id=691704605]
+shape = SubResource("RectangleShape2D_khkww")
+
+[node name="BoundsArea" type="Area2D" parent="." unique_id=1387079267 groups=["Bounds"]]
+position = Vector2(-827, -161)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundsArea" unique_id=1285026088]
+position = Vector2(827, 162)
+shape = SubResource("RectangleShape2D_sfuul")
+
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="BoundsArea" to="Platforms" method="_on_bounds_area_area_exited"]
+[connection signal="area_exited" from="BoundsArea" to="Bullet" method="_on_bounds_area_area_exited"]

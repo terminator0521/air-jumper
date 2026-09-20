@@ -71,8 +71,7 @@ func _reset_rocket(id) -> void:
 	Game.rocket_reset.emit(id, new_pos)
 	pass
 
-
-func _on_platform_reset_trigger_area_exited(area: Area2D) -> void:
+func _on_bounds_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
 		var id = area.get_parent().id
 		if id != null:
