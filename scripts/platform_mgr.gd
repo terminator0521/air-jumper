@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var _start_despawn_time: float = 3
+@export var _start_despawn_time: float = 6
 var _despawn_timer: float = 0
 
 const h_platform_offset = 300
