@@ -6,7 +6,6 @@ var platform_velocity
 var displacement: Vector2
 var h_direction: float
 var falling_speed: float = 10
-
 const SPEED = 300
 const JUMP_VELOCITY = -400
 const MAX_FALL_SPEED = 10
@@ -31,7 +30,6 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.play("default")
 
 func _physics_process(delta: float) -> void:
-	print(displacement.y)	
 	
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
@@ -57,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		displacement.y = JUMP_VELOCITY * delta
 	elif displacement.y < MAX_FALL_SPEED:
 		displacement.y += falling_speed * delta
+	
 	
 	# Apply movement
 	var collide = move_and_collide(displacement)

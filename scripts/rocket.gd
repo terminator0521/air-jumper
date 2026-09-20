@@ -1,13 +1,26 @@
 extends CharacterBody2D
 
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-var displacement: Vector2
+@export var id: int
+var is_active: bool = true;
+var displacement = Vector2(-300, 0)
 
 func _ready() -> void:
 	$Sprite.play("default")
-	position = Vector2(0, 0)
+	Game.rocket_reset.connect(_reset_rocket)
 
 func _physics_process(delta: float) -> void:
-	move_and_collide(displacement)
+	if is_active:
+		move_and_collide(displacement * delta)
+	
+	
+	pass
+
+func _reset_rocket(pos: Vector2) -> void:
+	position = pos
+	pass
+
+func set_id(id: int) -> void:
+	self.id = id
+	print(id)
+	pass
+	
