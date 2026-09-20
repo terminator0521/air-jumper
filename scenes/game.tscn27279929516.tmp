@@ -63,6 +63,10 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("4_u5sy4")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
+atlas = ExtResource("4_u5sy4")
+region = Rect2(64, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5newe"]
 atlas = ExtResource("4_u5sy4")
 region = Rect2(0, 96, 32, 32)
@@ -138,6 +142,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1kice")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5newe")
 }],
 "loop": 1,
@@ -175,7 +182,7 @@ script = ExtResource("1_yqjtg")
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_sfuul")
-animation = &"up"
+animation = &"in_air"
 
 [node name="Area2D" type="Area2D" parent="Player" unique_id=1526341759]
 

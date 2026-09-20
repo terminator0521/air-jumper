@@ -4,7 +4,7 @@ var is_jumping = false
 var is_grounded = false
 var platform_velocity
 var displacement: Vector2
-var h_direction: float
+var direction: Vector2
 var falling_speed: float = 10
 const SPEED = 300
 const JUMP_VELOCITY = -400
@@ -15,34 +15,52 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if h_direction != 0:
-		$AnimatedSprite2D.flip_h = (h_direction < 0)
+	print($AnimatedSprite2D.animation)
+	if direction.x != 0:
+		$AnimatedSprite2D.flip_h = (direction.x < 0)
 	
 	if is_grounded:
-		match h_direction:
-			1.0, -1.0:
-				if $AnimatedSprite2D.animation != "walking":
-					$AnimatedSprite2D.play("walking")
-			0.0:
-				if $AnimatedSprite2D.animation != "default":
-					$AnimatedSprite2D.play("default")
+		match direction:
+			Vector2(1, 0), Vector2(-1, 0):
+				if $AnimatedSprite2D.animation != "forward":
+					$AnimatedSprite2D.play("forward")
+			Vector2.ZERO:
+				if $AnimatedSprite2D.animation != "idle":
+					$AnimatedSprite2D.play("idle")
+			Vector2(0, 1):
+				if $AnimatedSprite2D.animation != "up":
+					$AnimatedSprite2D.play("up")
+			Vector2(1, 1), Vector2(-1, 1):
+				if $AnimatedSprite2D.animation != "d_up":
+					$AnimatedSprite2D.play("d_up")
+			Vector2(1, -1), Vector2(-1, -1):
+				if $AnimatedSprite2D.animation != "d_down":
+					$AnimatedSprite2D.play("d_down")
 	else:
-		if $AnimatedSprite2D.animation != "default":
-			$AnimatedSprite2D.play("default")
+		if $AnimatedSprite2D.animation != "in_air":
+			$AnimatedSprite2D.play("in_air")
 
 func _physics_process(delta: float) -> void:
 	
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
-		h_direction = -1
+		direction.x = -1
 		last_dir = -1
 	elif Input.is_key_pressed(KEY_RIGHT):
 		last_dir = 1
-		h_direction = 1
+		direction.x = 1
 	else:
-		h_direction = 0
+		direction.x = 0
+		
+	# up and down direction
+	if Input.is_key_pressed(KEY_UP):
+		direction.y = 1
+	elif Input.is_key_pressed(KEY_DOWN):
+		direction.y = -1
+	else:
+		direction.y = 0
 	
-	displacement.x = h_direction * SPEED * delta
+	displacement.x = direction.x * SPEED * delta
 	
 	# Gravity and jump
 	if is_grounded:
