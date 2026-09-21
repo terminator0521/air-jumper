@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	# Gravity and jump
 	if is_grounded:
 		if Input.is_action_just_pressed("jump") and !is_jumping:
-			if Input.is_action_pressed("down"):
+			if Input.is_action_pressed("down") and direction.x == 0:
 				is_grounded = false
 			else:
 				is_jumping = true
