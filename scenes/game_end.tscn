@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dqxyqtlgcks2u"]
 
+[ext_resource type="Script" uid="uid://deqolweh5nakp" path="res://scripts/game_over_message.gd" id="1_71rs3"]
+
 [node name="Control" type="Control" unique_id=1251547009]
 layout_mode = 3
 anchors_preset = 15
@@ -7,19 +9,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_71rs3")
 
 [node name="Retry" type="Button" parent="." unique_id=985666142]
 layout_mode = 0
-offset_left = 257.0
-offset_top = 175.0
-offset_right = 533.0
-offset_bottom = 285.0
+offset_left = 69.0
+offset_top = 358.0
+offset_right = 345.0
+offset_bottom = 468.0
 text = "RESTART"
 
 [node name="Quit" type="Button" parent="." unique_id=313173589]
 layout_mode = 0
-offset_left = 257.0
-offset_top = 393.0
-offset_right = 533.0
-offset_bottom = 503.0
+offset_left = 454.0
+offset_top = 358.0
+offset_right = 730.0
+offset_bottom = 468.0
 text = "QUIT"
+
+[node name="Message" type="Label" parent="." unique_id=419781903]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 85.0
+offset_right = 606.0
+offset_bottom = 206.0
+text = "
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

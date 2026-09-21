@@ -1,5 +1,6 @@
 extends Node2D
 
+var score = 0
 signal rocket_reset(id, pos: Vector2)
 signal rocket_offscreen(id)
 signal shoot(pos: Vector2, dir: Vector2)
