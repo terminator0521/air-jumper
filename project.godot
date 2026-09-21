@@ -24,7 +24,7 @@ Game="*uid://bfnl4j1p1gbec"
 window/size/viewport_width=800
 window/size/viewport_height=600
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 
 [dotnet]
 
