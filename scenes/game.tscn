@@ -174,7 +174,7 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_sfuul")
 animation = &"up"
 
-[node name="Area2D" type="Area2D" parent="Player" unique_id=1526341759]
+[node name="Area2D" type="Area2D" parent="Player" unique_id=1526341759 groups=["Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1567380980]
 shape = SubResource("RectangleShape2D_2g0sk")
@@ -204,4 +204,5 @@ shape = SubResource("RectangleShape2D_sfuul")
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
 [connection signal="area_entered" from="Bullet/Area" to="Bullet" method="_on_area_area_entered"]
 [connection signal="area_exited" from="BoundsArea" to="Platforms" method="_on_bounds_area_area_exited"]
+[connection signal="area_exited" from="BoundsArea" to="Player" method="_on_bounds_area_area_exited"]
 [connection signal="area_exited" from="BoundsArea" to="Bullet" method="_on_bounds_area_area_exited"]

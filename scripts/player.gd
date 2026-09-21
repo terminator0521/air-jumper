@@ -126,3 +126,10 @@ func _get_extents(area: Node2D) -> Vector2:
 		if extents is Vector2:
 			return extents * area.global_scale
 	return Vector2.ZERO
+
+
+func _on_bounds_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("Player"):
+		get_tree().change_scene_to_file("res://scenes/game_end.tscn")
+	pass
+	pass # Replace with function body.
