@@ -11,12 +11,13 @@ const BULLET_SPEED = 500
 const JUMP_VELOCITY = -600
 const MAX_FALL_SPEED = 400
 var last_dir: float
+var platforms: int = 0
 
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	print(is_jumping)
+	print(platforms)
 	if direction.x != 0:
 		$AnimatedSprite2D.flip_h = (direction.x < 0)
 	if is_grounded:
@@ -41,6 +42,10 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.play("in_air")
 
 func _physics_process(delta: float) -> void:
+	# platforms detection guard
+	if platforms < 0:
+		platforms = 0
+	
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
 		direction.x = -1
@@ -73,6 +78,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			displacement.y = 0
 	elif is_jumping:
+		#platforms = 0
 		is_jumping = false
 		displacement.y = JUMP_VELOCITY
 	elif displacement.y < MAX_FALL_SPEED:
@@ -109,13 +115,16 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
 		if $Area2D.global_position.y + _get_extents($Area2D).y - falling_speed < area.global_position.y - _get_extents(area).y:
+			platforms += 1
 			is_grounded = true
 			pass
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
-		is_grounded = false
+			platforms -= 1
+			if platforms == 0:
+				is_grounded = false
 	pass # Replace with function body.
 	
 func _get_extents(area: Node2D) -> Vector2:
