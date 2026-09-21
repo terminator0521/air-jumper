@@ -5,11 +5,11 @@ var is_grounded = false
 var platform_velocity
 var displacement: Vector2
 var direction: Vector2
-var falling_speed: float = 10
+var falling_speed: float = 20
 const SPEED = 300
-const BULLET_SPEED = 500.0
-const JUMP_VELOCITY = -400
-const MAX_FALL_SPEED = 10
+const BULLET_SPEED = 500
+const JUMP_VELOCITY = -600
+const MAX_FALL_SPEED = 400
 var last_dir: float
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.play("in_air")
 
 func _physics_process(delta: float) -> void:
-	
+	print(displacement)
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
 		direction.x = -1
@@ -59,10 +59,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		direction.y = 0
 	
-	displacement.x = direction.x * SPEED * delta
+	displacement.x = direction.x * SPEED
 	
 	# Gravity and jump
 	if is_grounded:
+		displacement.x += -100
 		if Input.is_action_just_pressed("jump") and !is_jumping:
 			if Input.is_action_pressed("down") and direction.x == 0:
 				is_grounded = false
@@ -73,9 +74,9 @@ func _physics_process(delta: float) -> void:
 			displacement.y = 0
 	elif is_jumping:
 		is_jumping = false
-		displacement.y = JUMP_VELOCITY * delta
+		displacement.y = JUMP_VELOCITY
 	elif displacement.y < MAX_FALL_SPEED:
-		displacement.y += falling_speed * delta
+		displacement.y += falling_speed
 	
 	# Shoot
 	if Input.is_action_just_pressed("shoot"):
@@ -90,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		Game.shoot.emit(position, input_dir)
 	
 	# Apply movement
-	var collide = move_and_collide(displacement)
+	var collide = move_and_collide(displacement * delta)
 	pass
 
 
@@ -98,7 +99,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Platform"):
 		if $Area2D.global_position.y + _get_extents($Area2D).y - falling_speed < area.global_position.y - _get_extents(area).y:
 			is_grounded = true
-			#$Area2D.global_position.y = area.global_position.y - _get_extents(area).y - _get_extents($Area2D).y
 			pass
 
 
