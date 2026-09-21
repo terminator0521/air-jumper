@@ -25,12 +25,12 @@ func _on_bounds_area_area_exited(area: Area2D) -> void:
 	pass # Replace with function body.
 
 func _disable_bullet() -> void:
-	process_mode = Node.PROCESS_MODE_DISABLED
+	set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 	shooting = false
 	hide()
 	
 func _enable_bullet() -> void:
-	process_mode = Node.PROCESS_MODE_INHERIT
+	set_deferred("process_mode", Node.PROCESS_MODE_INHERIT)
 	shooting = true
 	show()
 
@@ -41,4 +41,5 @@ func _on_area_area_entered(area: Area2D) -> void:
 		var id = area.get_parent().id
 		if id != null:
 			Game.rocket_offscreen.emit(id)
+			Game.score += 1
 	pass # Replace with function body.
