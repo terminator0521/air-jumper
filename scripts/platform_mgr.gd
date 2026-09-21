@@ -24,8 +24,8 @@ const _SPAWN_POS_Y: Array[float] = [
 const _SPAWN_POS_X: Array[float] = [
 	_start_x + 40,
 	_start_x + 80,
-	_start_x - 40,
-	_start_x - 80,
+	_start_x + 120,
+	_start_x + 160,
 	_start_x
 ]
 var _rockets: Array[Node2D]

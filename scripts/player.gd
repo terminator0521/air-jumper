@@ -16,6 +16,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	print(direction)
 	if direction.x != 0:
 		$AnimatedSprite2D.flip_h = (direction.x < 0)
 	if is_grounded:
@@ -23,7 +24,7 @@ func _process(delta: float) -> void:
 			Vector2(1, 0), Vector2(-1, 0):
 				if $AnimatedSprite2D.animation != "forward":
 					$AnimatedSprite2D.play("forward")
-			Vector2.ZERO:
+			Vector2.ZERO, Vector2(0, -1):
 				if $AnimatedSprite2D.animation != "idle":
 					$AnimatedSprite2D.play("idle")
 			Vector2(0, 1):
