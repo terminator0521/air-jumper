@@ -1,19 +1,18 @@
 extends CharacterBody2D
 
-var dir: float
+var dir: Vector2
 var shooting: bool = false
-const SPEED = 500.0
 
 func _ready() -> void:
 	Game.shoot.connect(_shoot)
 
 func _physics_process(delta: float) -> void:
 	if shooting:
-		move_and_collide(Vector2(SPEED * dir, 0) * delta)
+		move_and_collide(dir * delta)
 	
 	
 
-func _shoot(pos: Vector2, dir: float) -> void:
+func _shoot(pos: Vector2, dir: Vector2) -> void:
 	if !shooting:
 		position = pos
 		self.dir = dir

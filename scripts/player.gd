@@ -7,6 +7,7 @@ var displacement: Vector2
 var direction: Vector2
 var falling_speed: float = 10
 const SPEED = 300
+const BULLET_SPEED = 500.0
 const JUMP_VELOCITY = -400
 const MAX_FALL_SPEED = 10
 var last_dir: float
@@ -15,10 +16,8 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	print($AnimatedSprite2D.animation)
 	if direction.x != 0:
 		$AnimatedSprite2D.flip_h = (direction.x < 0)
-	
 	if is_grounded:
 		match direction:
 			Vector2(1, 0), Vector2(-1, 0):
@@ -80,7 +79,15 @@ func _physics_process(delta: float) -> void:
 	
 	# Shoot
 	if Input.is_action_just_pressed("shoot"):
-		Game.shoot.emit(position, last_dir)
+		var input_dir: Vector2
+		if direction.y == -1 and direction.x == 0:
+			input_dir.y = 0
+		else:
+			input_dir.y = -direction.y
+		input_dir.x = last_dir
+		input_dir = input_dir.normalized()
+		input_dir *= BULLET_SPEED
+		Game.shoot.emit(position, input_dir)
 	
 	# Apply movement
 	var collide = move_and_collide(displacement)
