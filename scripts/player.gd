@@ -16,7 +16,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	print(direction)
+	print(is_jumping)
 	if direction.x != 0:
 		$AnimatedSprite2D.flip_h = (direction.x < 0)
 	if is_grounded:
@@ -81,15 +81,21 @@ func _physics_process(delta: float) -> void:
 	# Shoot
 	if Input.is_action_just_pressed("shoot"):
 		var input_dir: Vector2
-		if direction.y == -1 and direction.x == 0:
-			input_dir.y = 0
-		else:
-			input_dir.y = -direction.y
+		
 		
 		if direction.y == 1 and direction.x == 0:
 			input_dir.x = 0
 		else:
 			input_dir.x = last_dir
+			
+		if direction.y == -1 and direction.x == 0:
+			if !is_grounded:
+				input_dir.y = 1
+				input_dir.x = 0
+			else:
+				input_dir.y = 0
+		else:
+			input_dir.y = -direction.y
 		
 		input_dir = input_dir.normalized()
 		input_dir *= BULLET_SPEED
