@@ -40,7 +40,6 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.play("in_air")
 
 func _physics_process(delta: float) -> void:
-	print(displacement)
 	# right to left direction
 	if Input.is_key_pressed(KEY_LEFT):
 		direction.x = -1
@@ -80,14 +79,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Shoot
 	if Input.is_action_just_pressed("shoot"):
+		print(direction)
 		var input_dir: Vector2
 		if direction.y == -1 and direction.x == 0:
 			input_dir.y = 0
 		else:
 			input_dir.y = -direction.y
-		input_dir.x = last_dir
+		
+		if direction.y == 1 and direction.x == 0:
+			input_dir.x = 0
+		else:
+			input_dir.x = last_dir
+		
 		input_dir = input_dir.normalized()
 		input_dir *= BULLET_SPEED
+		print(input_dir)
 		Game.shoot.emit(position, input_dir)
 	
 	# Apply movement
