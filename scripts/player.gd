@@ -17,7 +17,6 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	print(platforms)
 	if direction.x != 0:
 		$AnimatedSprite2D.flip_h = (direction.x < 0)
 	if is_grounded:
