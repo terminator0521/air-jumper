@@ -26,12 +26,19 @@ func _on_bounds_area_area_exited(area: Area2D) -> void:
 
 func _disable_bullet() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
-	$CollisionShape2D.disabled = true
 	shooting = false
 	hide()
 	
 func _enable_bullet() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
-	$CollisionShape2D.disabled = false
 	shooting = true
 	show()
+
+
+func _on_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Platform") && shooting:
+		_disable_bullet()
+		var id = area.get_parent().id
+		if id != null:
+			Game.rocket_offscreen.emit(id)
+	pass # Replace with function body.

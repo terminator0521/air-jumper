@@ -148,9 +148,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0sk"]
 size = Vector2(38, 78)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khkww"]
-radius = 15.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khkww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfuul"]
@@ -191,9 +188,6 @@ script = ExtResource("5_p57ef")
 [node name="Sprite2D" type="Sprite2D" parent="Bullet" unique_id=312681583]
 texture = ExtResource("5_iywne")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet" unique_id=650765407]
-shape = SubResource("CapsuleShape2D_khkww")
-
 [node name="Area" type="Area2D" parent="Bullet" unique_id=781334428 groups=["Bullet"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet/Area" unique_id=691704605]
@@ -208,5 +202,6 @@ shape = SubResource("RectangleShape2D_sfuul")
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="Bullet/Area" to="Bullet" method="_on_area_area_entered"]
 [connection signal="area_exited" from="BoundsArea" to="Platforms" method="_on_bounds_area_area_exited"]
 [connection signal="area_exited" from="BoundsArea" to="Bullet" method="_on_bounds_area_area_exited"]
